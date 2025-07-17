@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class StepTracker {
 
-    private int purpose = 1000;
+    private int purpose = 10000;
     HashMap<Integer, MonthData> monthToData = new HashMap<>();
 
     public StepTracker() {
