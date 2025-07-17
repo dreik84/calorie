@@ -19,6 +19,17 @@ public class Main {
     }
 
     private static void printMenu() {
-        System.out.print("Menu: ");
+        String[] menuItems = {
+                "Выйти из приложения",
+                "Кол-во шагов за день",
+                "Статистика за месяц",
+                "Изменить цель по кол-ву шагов в день"
+        };
+
+        System.out.println("Меню приложения: ");
+
+        for (int i = 0; i < menuItems.length; i++) {
+            System.out.println(i + menuItems[i]);
+        }
     }
 }
