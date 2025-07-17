@@ -26,10 +26,10 @@ public class Main {
                 "Изменить цель по кол-ву шагов в день"
         };
 
-        System.out.println("Меню приложения: ");
-
         for (int i = 0; i < menuItems.length; i++) {
-            System.out.println(i + menuItems[i]);
+            System.out.printf("%d. %s\n", i, menuItems[i]);
         }
+
+        System.out.print("Введите пункт меню: ");
     }
 }
