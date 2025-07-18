@@ -8,10 +8,23 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         printMenu();
         int userInput = scanner.nextInt();
+        StepTracker stepTracker = new StepTracker();
 
         while (userInput != 0) {
 
-            // TODO
+            switch (userInput) {
+                case 1:
+                    System.out.print("Введите количество шагов: ");
+                    int steps = scanner.nextInt();
+                case 2:
+                    System.out.print("Введите номер месяца: ");
+                    System.out.println("Статистика за выбранный месяц " + scanner.nextInt());
+                case 3:
+                    System.out.print("Введите новую цель по шагам: ");
+                    stepTracker.setPurpose(scanner.nextInt());
+                default:
+                    System.out.println("Такой команды нет");
+            }
 
             printMenu();
             userInput = scanner.nextInt();
