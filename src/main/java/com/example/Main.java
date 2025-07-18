@@ -16,12 +16,15 @@ public class Main {
                 case 1:
                     System.out.print("Введите количество шагов: ");
                     int steps = scanner.nextInt();
+                    break;
                 case 2:
                     System.out.print("Введите номер месяца: ");
                     System.out.println("Статистика за выбранный месяц " + scanner.nextInt());
+                    break;
                 case 3:
                     System.out.print("Введите новую цель по шагам: ");
                     stepTracker.setPurpose(scanner.nextInt());
+                    break;
                 default:
                     System.out.println("Такой команды нет");
             }
