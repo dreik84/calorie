@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 public class StepTracker {
 
@@ -21,8 +22,27 @@ public class StepTracker {
         this.purpose = purpose;
     }
 
-    class MonthData {
+    public void showStepsByMonth(int month) {
+        int[] days = monthToData.get(month).days;
+        StringJoiner sj = new StringJoiner(", ");
 
-        // TODO
+        for (int i = 0; i < days.length; i++) {
+            sj.add(String.format("%d день: %d", i, days[i]));
+        }
+
+        System.out.println(sj);
+    }
+
+    static class MonthData {
+
+        int[] days = new int[30];
+
+        public void addSteps(int day, int steps) {
+            days[day] = steps;
+        }
+
+        public int getSteps(int day) {
+            return days[day];
+        }
     }
 }
