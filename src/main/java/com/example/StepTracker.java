@@ -22,6 +22,11 @@ public class StepTracker {
         this.purpose = purpose;
     }
 
+    public void addStepsToMonth(int month, int day, int steps) {
+        MonthData monthData = monthToData.get(month);
+        monthData.addSteps(day, steps);
+    }
+
     public void showStepsByMonth(int month) {
         int[] days = monthToData.get(month).days;
         StringJoiner sj = new StringJoiner(", ");
@@ -38,7 +43,7 @@ public class StepTracker {
         int[] days = new int[30];
 
         public void addSteps(int day, int steps) {
-            days[day] = steps;
+            days[day] = Math.max(steps, 0);
         }
 
         public int getSteps(int day) {
