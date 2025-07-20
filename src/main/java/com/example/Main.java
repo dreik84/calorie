@@ -19,7 +19,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.print("Введите номер месяца: ");
-                    System.out.println("Статистика за выбранный месяц " + scanner.nextInt());
+                    stepTracker.showStepsByMonth(scanner.nextInt());
                     break;
                 case 3:
                     System.out.print("Введите новую цель по шагам: ");
