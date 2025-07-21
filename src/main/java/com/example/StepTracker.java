@@ -44,9 +44,28 @@ public class StepTracker {
         System.out.println("Общее количество шагов за месяц равно " + monthData.getTotalSteps());
     }
 
-    static class MonthData {
+    public void showMaxStepsByMonth(int month) {
+        MonthData monthData = monthToData.get(month);
+        System.out.println("Максимальное кол-во шагов за месяц " + monthData.getMaxSteps());
+    }
 
-        int[] days = new int[30];
+    public void showAverageStepsByMonth(int month) {
+        MonthData monthData = monthToData.get(month);
+        System.out.println("Среднее количество шагов " + monthData.getAverageSteps());
+    }
+
+    public void showDistanceByMonth(int month) {
+        MonthData monthData = monthToData.get(month);
+        System.out.println("Пройденная дистанция (в км) ");
+    }
+
+    private static class MonthData {
+
+        private final int[] days;
+
+        MonthData() {
+            days = new int[30];
+        }
 
         public void addSteps(int day, int steps) {
             days[day] = Math.max(steps, 0);
@@ -65,6 +84,30 @@ public class StepTracker {
 
             return totalSteps;
 //            return Arrays.stream(days).sum();
+        }
+
+        public int getMaxSteps() {
+            int maxSteps = 0;
+
+            for (int day : days) {
+                maxSteps = Math.max(maxSteps, day);
+            }
+
+            return maxSteps;
+//            return Arrays.stream(days).max().getAsInt();
+        }
+
+        public int getAverageSteps() {
+            return getTotalSteps() / days.length;
+//            return (int) Arrays.stream(days).average().getAsDouble();
+        }
+
+        public int getDistance() {
+            return Converter.stepsToKilometers(getTotalSteps());
+        }
+
+        public int getCalories() {
+            return Converter.stepsToKiloCalories(getTotalSteps());
         }
     }
 }
