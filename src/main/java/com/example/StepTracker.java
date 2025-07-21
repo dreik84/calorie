@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.StringJoiner;
 
@@ -38,6 +39,11 @@ public class StepTracker {
         System.out.println(sj);
     }
 
+    public void showTotalStepsByMonth(int month) {
+        MonthData monthData = monthToData.get(month);
+        System.out.println("Общее количество шагов за месяц равно " + monthData.getTotalSteps());
+    }
+
     static class MonthData {
 
         int[] days = new int[30];
@@ -48,6 +54,17 @@ public class StepTracker {
 
         public int getSteps(int day) {
             return days[day];
+        }
+
+        public int getTotalSteps() {
+            int totalSteps = 0;
+
+            for (int day : days) {
+                totalSteps += day;
+            }
+
+            return totalSteps;
+//            return Arrays.stream(days).sum();
         }
     }
 }
