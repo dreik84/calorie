@@ -1,6 +1,5 @@
 package com.example;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.StringJoiner;
 
@@ -20,43 +19,24 @@ public class StepTracker {
     }
 
     public void setPurpose(int purpose) {
-        this.purpose = purpose;
+        this.purpose = Math.max(purpose, 0);
     }
 
-    public void addStepsToMonth(int month, int day, int steps) {
+    public void addSteps(int month, int day, int steps) {
         MonthData monthData = monthToData.get(month);
         monthData.addSteps(day, steps);
     }
 
-    public void showStepsByMonth(int month) {
-        int[] days = monthToData.get(month).days;
-        StringJoiner sj = new StringJoiner(", ");
-
-        for (int i = 0; i < days.length; i++) {
-            sj.add(String.format("%d день: %d", i, days[i]));
-        }
-
-        System.out.println(sj);
-    }
-
-    public void showTotalStepsByMonth(int month) {
+    public void showMonthlyStatistics(int month) {
         MonthData monthData = monthToData.get(month);
+
+        System.out.println("Кол-во пройденных шагов: " + monthData.getAllSteps());
         System.out.println("Общее количество шагов за месяц равно " + monthData.getTotalSteps());
-    }
-
-    public void showMaxStepsByMonth(int month) {
-        MonthData monthData = monthToData.get(month);
         System.out.println("Максимальное кол-во шагов за месяц " + monthData.getMaxSteps());
-    }
-
-    public void showAverageStepsByMonth(int month) {
-        MonthData monthData = monthToData.get(month);
         System.out.println("Среднее количество шагов " + monthData.getAverageSteps());
-    }
-
-    public void showDistanceByMonth(int month) {
-        MonthData monthData = monthToData.get(month);
-        System.out.println("Пройденная дистанция (в км) ");
+        System.out.println("Пройденная дистанция (в км) " + monthData.getDistance());
+        System.out.println("Кол-во сожжённых калорий: " + monthData.getCalories());
+        System.out.println("Лучшая серия: " + monthData.getBestSeries(purpose));
     }
 
     private static class MonthData {
@@ -73,6 +53,16 @@ public class StepTracker {
 
         public int getSteps(int day) {
             return days[day];
+        }
+
+        public String getAllSteps() {
+            StringJoiner sj = new StringJoiner(", ");
+
+            for (int i = 0; i < days.length; i++) {
+                sj.add(String.format("%d день: %d", i, days[i]));
+            }
+
+            return sj.toString();
         }
 
         public int getTotalSteps() {
@@ -108,6 +98,22 @@ public class StepTracker {
 
         public int getCalories() {
             return Converter.stepsToKiloCalories(getTotalSteps());
+        }
+
+        public int getBestSeries(int purpose) {
+            int maxSeries = 0;
+            int tmp = 0;
+
+            for (int day : days) {
+                if (day > purpose) {
+                    tmp++;
+                    maxSeries = Math.max(maxSeries, tmp);
+                } else {
+                    tmp = 0;
+                }
+            }
+
+            return maxSeries;
         }
     }
 }
