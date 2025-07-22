@@ -14,12 +14,17 @@ public class Main {
 
             switch (userInput) {
                 case 1:
+                    System.out.print("Введите номер месяца: ");
+                    int month = scanner.nextInt();
+                    System.out.print("Введите день: ");
+                    int day = scanner.nextInt();
                     System.out.print("Введите количество шагов: ");
                     int steps = scanner.nextInt();
+                    stepTracker.addSteps(month, day, steps);
                     break;
                 case 2:
                     System.out.print("Введите номер месяца: ");
-                    stepTracker.showStepsByMonth(scanner.nextInt());
+                    stepTracker.showMonthlyStatistics(scanner.nextInt());
                     break;
                 case 3:
                     System.out.print("Введите новую цель по шагам: ");
