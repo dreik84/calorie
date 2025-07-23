@@ -5,17 +5,16 @@ import java.util.StringJoiner;
 
 public class StepTracker {
 
-    private int purpose = 10000;
-    HashMap<Integer, MonthData> monthToData = new HashMap<>();
+    private int purpose;
+    private final HashMap<Integer, MonthData> monthToData;
 
     public StepTracker() {
+        purpose = 10000;
+        monthToData = new HashMap<>();
+
         for (int i = 0; i < 12; i++) {
             monthToData.put(i, new MonthData());
         }
-    }
-
-    public int getPurpose() {
-        return purpose;
     }
 
     public void setPurpose(int purpose) {
